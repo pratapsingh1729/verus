@@ -54,6 +54,17 @@ pub fn vec_index<T, A: Allocator>(vec: &Vec<T, A>, i: usize) -> (element: &T)
     &vec[i]
 }
 
+// Index decreases axiom
+pub broadcast proof fn axiom_vec_index_decreases<A>(v: Vec<A>, i: int)
+    requires
+        0 <= i < v.len(),
+    ensures
+        #[trigger] (decreases_to!(v => v[i])),
+{
+    admit();
+}
+
+
 ////// Len (with autospec)
 pub open spec fn spec_vec_len<T, A: Allocator>(v: &Vec<T, A>) -> usize;
 
@@ -236,6 +247,7 @@ pub fn ex_vec_truncate<T, A: Allocator>(vec: &mut Vec<T, A>, len: usize)
 #[cfg_attr(verus_keep_ghost, verifier::prune_unless_this_module_is_used)]
 pub broadcast group group_vec_axioms {
     axiom_spec_len,
+    axiom_vec_index_decreases,
 }
 
 } // verus!
