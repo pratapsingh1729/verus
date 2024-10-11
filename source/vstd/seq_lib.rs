@@ -1761,6 +1761,14 @@ pub proof fn lemma_seq_append_take_skip<A>(a: Seq<A>, b: Seq<A>, n: int)
 {
 }
 
+/// For any index `n` into sequence `s`, `s` is equal to the first `n` elements of `s` concatenated
+/// with the remaining elements of `s` after the first `n` elements.
+pub proof fn lemma_seq_take_append_skip<T>(s: Seq<T>, n: int)
+    requires 0 <= n < s.len()
+    ensures s =~= s.take(n).add(s.skip(n))
+{
+}
+
 /************* Lemmas about the Commutability of Take and Skip with Update ************/
 
 // This verified lemma used to be an axiom in the Dafny prelude
