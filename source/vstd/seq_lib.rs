@@ -1765,7 +1765,7 @@ pub proof fn lemma_seq_append_take_skip<A>(a: Seq<A>, b: Seq<A>, n: int)
 /// with the remaining elements of `s` after the first `n` elements.
 pub proof fn lemma_seq_take_append_skip<T>(s: Seq<T>, n: int)
     requires 0 <= n < s.len()
-    ensures s =~= s.take(n).add(s.skip(n))
+    ensures s =~= s.take(n) + s.skip(n)
 {
 }
 
